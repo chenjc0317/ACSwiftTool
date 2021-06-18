@@ -1,0 +1,6 @@
+framework module ACSwiftTool {
+  umbrella header "ACSwiftTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

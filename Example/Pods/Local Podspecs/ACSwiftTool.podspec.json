@@ -1,0 +1,22 @@
+{
+  "name": "ACSwiftTool",
+  "version": "0.1.0",
+  "summary": "A short description of ACSwiftTool.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/chenjc0317/ACSwiftTool",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "chenjc0317": "chenjc0317@163.com"
+  },
+  "source": {
+    "git": "https://github.com/chenjc0317/ACSwiftTool.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ACSwiftTool/Classes/**/*"
+}

@@ -1,0 +1,16 @@
+PODS:
+  - ACSwiftTool (0.1.0)
+
+DEPENDENCIES:
+  - ACSwiftTool (from `../`)
+
+EXTERNAL SOURCES:
+  ACSwiftTool:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ACSwiftTool: 1c3913d16f398e98b063f1e4f6032fce190304fd
+
+PODFILE CHECKSUM: 8be2a1347576411aff848e0a9a4ce6dbe10c6076
+
+COCOAPODS: 1.10.1
