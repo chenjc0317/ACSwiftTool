@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ACSwiftTool'
-  s.version          = '1.0.0'
+  s.version          = '1.0.2'
   s.summary          = 'This is an iOS App development tool library'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  This is an iOS App development tool library
+  TOOD:This is an iOS App development tool library
                        DESC
 
   s.homepage         = 'https://github.com/chenjc0317/ACSwiftTool'
