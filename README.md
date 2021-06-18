@@ -5,25 +5,26 @@
 [![License](https://img.shields.io/cocoapods/l/ACSwiftTool.svg?style=flat)](https://cocoapods.org/pods/ACSwiftTool)
 [![Platform](https://img.shields.io/cocoapods/p/ACSwiftTool.svg?style=flat)](https://cocoapods.org/pods/ACSwiftTool)
 
-## Example
+这是一个iOS App开发工具库，基于Swift语言，包含了常用的拓展和一些工具拓展。                                                                                                     
+尽量保持开发的原汁原味，欢迎使用，喜欢star✨
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+## 说明
 
-## Requirements
+1.本库参考https://github.com/Tliens/SpeedySwift ，并结合自己的项目开发添加了个别功能。                                                                                     
+2.因个别功能基于其他三方库实现，使用本库时，请先导入一下三方库：                                                                                                               
+- HandyJSON
+- MJRefresh
+- Toast-Swift
 
-## Installation
+## 如何使用
 
-ACSwiftTool is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Cocopods导入
 
 ```ruby
 pod 'ACSwiftTool'
 ```
+**提示**：如果`pod install`失败，请先`pod repo`更新本地库，你也可以通过`pod install --no-repo-update`安装
 
-## Author
+## 联系我
 
-chenjc0317, chenjc0317@163.com
-
-## License
-
-ACSwiftTool is available under the MIT license. See the LICENSE file for more info.
+chenjc0317@163.c0m
