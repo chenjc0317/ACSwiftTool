@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SVProgressHUD
+
 /// 线的位置
 public enum LinePosition: Int {
     case top = 0

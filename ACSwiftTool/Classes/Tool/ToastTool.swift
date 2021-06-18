@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toast_Swift
 
 public class ToastConfigure{
     static let shared = ToastConfigure()

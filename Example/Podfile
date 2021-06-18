@@ -9,7 +9,5 @@ target 'ACSwiftTool_Example' do
   pod 'Toast-Swift'
   target 'ACSwiftTool_Tests' do
     inherit! :search_paths
-
-    
   end
 end
