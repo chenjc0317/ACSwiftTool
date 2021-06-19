@@ -15,6 +15,7 @@
 - HandyJSON
 - MJRefresh
 - Toast-Swift
+- SVProgressHUD
 
 ## 如何使用
 
