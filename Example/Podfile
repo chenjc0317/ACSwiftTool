@@ -4,9 +4,6 @@ platform :ios, '9.0'
 
 target 'ACSwiftTool_Example' do
   pod 'ACSwiftTool', :path => '../'
-  pod 'HandyJSON'
-  pod 'MJRefresh'
-  pod 'Toast-Swift'
   target 'ACSwiftTool_Tests' do
     inherit! :search_paths
   end
