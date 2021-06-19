@@ -9,17 +9,17 @@
 import UIKit
 public extension CGFloat{
     var scale:CGFloat{
-        return SS.scale(self)
+        return SwiftTool.scale(self)
     }
 }
 
 public extension Int{
     var scale:CGFloat{
-        return SS.scale(CGFloat(self))
+        return SwiftTool.scale(CGFloat(self))
     }
 }
 public extension Double{
     var scale:CGFloat{
-        return SS.scale(CGFloat(self))
+        return SwiftTool.scale(CGFloat(self))
     }
 }

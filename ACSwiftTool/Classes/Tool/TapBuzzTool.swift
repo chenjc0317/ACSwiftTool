@@ -9,7 +9,7 @@
 import Foundation
 
 extension SwiftTool{
-    public static let buzz = TapBuzz.self
+    public static let buzz = TapBuzzTool.self
 }
 /// 振动反馈
 public class TapBuzzTool{

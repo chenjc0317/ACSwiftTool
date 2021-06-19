@@ -48,7 +48,7 @@ public extension SwiftTool{
     /// 跳转到App
     /// - Parameter type： 类型
     /// - Parameter completionHandler：  block回调，bool表示是否成功
-    static func jumpApp(type:SSJumpStatus, completionHandler completion: ((JumpStatus) -> Void)? = nil){
+    static func jumpApp(type:JumpStatus, completionHandler completion: ((JumpStatus) -> Void)? = nil){
         if let url: URL = URL(string: type.rawValue) {
             SwiftTool.jump(url: url, completionHandler: completion)
         }else{

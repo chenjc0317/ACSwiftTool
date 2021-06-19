@@ -86,6 +86,7 @@ extension UIView {
     private struct AssociatedKeys {
         static var tapGesture = false
     }
+    public typealias NormalClosure = () -> ()
     /// 添加点击手势
     /// - Parameter handler: 点击回调
     func addTapGesture(handler: @escaping NormalClosure) {

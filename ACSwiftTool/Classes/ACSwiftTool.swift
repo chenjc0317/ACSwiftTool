@@ -18,6 +18,9 @@ import UIKit
 public typealias SwiftTool = ACSwiftTool
 @objcMembers
 public class ACSwiftTool: NSObject {
+    
+    public static let lock = DispatchSemaphore(value: 1)
+    
     /// 屏幕宽
     public static let screenWidth = UIScreen.main.bounds.size.width
     /// 屏幕高
@@ -102,6 +105,18 @@ public class ACSwiftTool: NSObject {
         let heigth = statusBarHeight + navBarHeight
         return heigth
     }
+    
+    public static func scaleW(_ width: CGFloat,fit:CGFloat = 375.0) -> CGFloat {
+        return screenWidth / fit * width
+    }
+     
+    public static func scaleH(_ height: CGFloat,fit:CGFloat = 812.0) -> CGFloat {
+        return screenWidth / fit * height
+    }
+    public static func scale(_ value: CGFloat) -> CGFloat {
+        return scaleW(value)
+    }
+    
     /// 根据控制器获取 顶层控制器
     public static func topVC(_ viewController: UIViewController?) -> UIViewController? {
         guard let currentVC = viewController else {
@@ -125,10 +140,10 @@ public class ACSwiftTool: NSObject {
     public static func topVC() -> UIViewController? {
         var window = UIApplication.shared.keyWindow
         //是否为当前显示的window
-        if window?.windowLevel != UIWindow.Level.leastNormalMagnitude{
+        if window?.windowLevel != UIWindow.Level.normal{
             let windows = UIApplication.shared.windows
             for  windowTemp in windows{
-                if windowTemp.windowLevel == UIWindow.Level.leastNormalMagnitude{
+                if windowTemp.windowLevel == UIWindow.Level.normal{
                     window = windowTemp
                     break
                 }
@@ -146,7 +161,7 @@ public class ACSwiftTool: NSObject {
     /// 当用户截屏时的监听
     public static func didTakeScreenShot(_ action: @escaping (_ notification: Notification) -> Void) {
         // http://stackoverflow.com/questions/13484516/ios-detection-of-screenshot
-        _ = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationUserDidTakeScreenshot,
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification,
                                                    object: nil,
                                                    queue: OperationQueue.main) { notification in
                                                     action(notification)

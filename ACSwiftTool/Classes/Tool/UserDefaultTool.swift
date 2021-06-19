@@ -5,7 +5,7 @@
 //  Created by 阿潮 on 2021/6/18.
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
-
+import HandyJSON
 public enum DefaultWrapperKey {
     /// 普通类型
     case base(String)
@@ -21,14 +21,14 @@ public enum DefaultWrapperKey {
 ///         var name = ""
 ///         required init() {}
 ///     }
-///     @SSDefault(key: .handyJSON("person"), defaultValue: Person())
+///     @UserDefaultTool(key: .handyJSON("person"), defaultValue: Person())
 ///     var person
 ///
 ///     // Base Type
-///     @SSDefault(key: .base("username"), defaultValue: "")
+///     @UserDefaultTool(key: .base("username"), defaultValue: "")
 ///     var username: String
 @propertyWrapper
-public struct SSDefault<T: HandyJSON> {
+public struct UserDefaultTool<T: HandyJSON> {
     let key: DefaultWrapperKey
     let defaultValue: T
     public init(key: DefaultWrapperKey, defaultValue: T) {
