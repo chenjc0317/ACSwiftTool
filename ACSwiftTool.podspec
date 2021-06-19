@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ACSwiftTool'
-  s.version          = '1.0.8'
-  s.summary          = 'This is an iOS App development tool library'
+  s.version          = '1.0.9'
+  s.summary          = 'This is an App development tool library based on Swift language.'
 
   s.description      = <<-DESC
   这是一个 App 开发工具库，基于 Swift 语言。This is an App development tool library based on Swift language.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenjc0317' => 'chenjc0317@163.com' }
   s.source           = { :git => 'https://github.com/chenjc0317/ACSwiftTool.git', :tag => s.version.to_s }
-  s.swift_version    = '4.0'
+  s.swift_version    = '5.0'
   s.ios.deployment_target = '11.0'
   s.source_files = 'ACSwiftTool/Classes/**/*'
   
