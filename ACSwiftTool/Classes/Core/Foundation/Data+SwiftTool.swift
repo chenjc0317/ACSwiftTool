@@ -2,8 +2,8 @@
 //  Datapublic extensions.swift
 //  SwiftTool
 //
-//  Created by Quinn Von on 07/12/2016.
-//  Copyright © 2016 SpeedySwift
+//  Created by Ac on 2021/6/18.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 #if canImport(Foundation)

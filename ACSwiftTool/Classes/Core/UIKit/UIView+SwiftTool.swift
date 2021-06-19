@@ -2,11 +2,12 @@
 //  UIView+SwiftTool.swift
 //  SwiftTool
 //
-//  Created by Quinn on 2020/10/20.
+//  Created by Ac on 2021/6/18.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import UIKit
-
+import SVProgressHUD
 /// 线的位置
 public enum LinePosition: Int {
     case top = 0

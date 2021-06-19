@@ -2,7 +2,8 @@
 //  UITableView+SwiftTool.swift
 //  SpeedySwift
 //
-//  Created by Quinn on 2021/1/8.
+//  Created by Ac on 2021/6/18.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import UIKit

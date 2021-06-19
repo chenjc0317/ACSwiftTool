@@ -2,8 +2,8 @@
 //  Dictionarypublic extensions.swift
 //  SwiftTool
 //
-//  Created by Quinn Von on 8/24/16.
-//  Copyright © 2016 SpeedySwift
+//  Created by Ac on 2021/6/18.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import Foundation

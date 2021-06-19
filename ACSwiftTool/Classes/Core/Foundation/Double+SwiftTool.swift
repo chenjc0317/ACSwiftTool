@@ -2,7 +2,8 @@
 //  Double+SwiftTool.swift
 //  SwiftTool
 //
-//  Created by Quinn on 2020/11/17.
+//  Created by Ac on 2021/6/18.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import Foundation
