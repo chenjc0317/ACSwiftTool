@@ -8,18 +8,18 @@
 
 import UIKit
 
-public extension UITableView{
+extension UITableView{
     /// 注册Header 或 Footer(Nib)
     ///
     /// - Parameter cell: cell类型
-    public func registerNib<T: UITableViewHeaderFooterView>(_ view: T.Type, bundle: Bundle? = nil) {
+    func registerNib<T: UITableViewHeaderFooterView>(_ view: T.Type, bundle: Bundle? = nil) {
         register(UINib(nibName: "\(view)", bundle: bundle), forHeaderFooterViewReuseIdentifier: "\(view)")
     }
     
     /// 注册Header 或 Footer
     ///
     /// - Parameter cell: cell类型
-    public func register<T: UITableViewHeaderFooterView>(_ view: T.Type) {
+    func register<T: UITableViewHeaderFooterView>(_ view: T.Type) {
         register(view, forHeaderFooterViewReuseIdentifier: "\(view)")
     }
     
@@ -29,21 +29,21 @@ public extension UITableView{
     ///   - cell: cell类型
     ///   - indexPath: indexPath
     /// - Returns: cell实例
-    public func get<T: UITableViewHeaderFooterView>(_ view: T.Type) -> T {
+    func get<T: UITableViewHeaderFooterView>(_ view: T.Type) -> T {
         return dequeueReusableHeaderFooterView(withIdentifier: "\(view)") as! T
     }
     
     /// 注册Cell(Nib)
     ///
     /// - Parameter cell: cell类型
-    public func registerNib<T: UITableViewCell>(_ cell: T.Type, bundle: Bundle? = nil) {
+    func registerNib<T: UITableViewCell>(_ cell: T.Type, bundle: Bundle? = nil) {
         register(UINib(nibName: "\(cell)", bundle: bundle), forCellReuseIdentifier: "\(cell)")
     }
     
     /// 注册Cell
     ///
     /// - Parameter cell: cell类型
-    public func register<T: UITableViewCell>(_ cell: T.Type) {
+    func register<T: UITableViewCell>(_ cell: T.Type) {
         register(cell, forCellReuseIdentifier: "\(cell)")
     }
     
@@ -53,7 +53,7 @@ public extension UITableView{
     ///   - cell: cell类型
     ///   - indexPath: indexPath
     /// - Returns: cell实例
-    public func get<T: UITableViewCell>(_ cell: T.Type, for indexPath: IndexPath) -> T {
+    func get<T: UITableViewCell>(_ cell: T.Type, for indexPath: IndexPath) -> T {
         return dequeueReusableCell(withIdentifier: "\(cell)", for: indexPath) as! T
     }
     
