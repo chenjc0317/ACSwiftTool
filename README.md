@@ -24,7 +24,7 @@
 ```ruby
 pod 'ACSwiftTool'
 ```
-**提示**：如果`pod install`失败，请先`pod repo`更新本地库，你也可以通过`pod install --no-repo-update`安装
+**提示**：如果`pod install`失败，请先`pod repo update`更新本地库，你也可以通过`pod install --no-repo-update`安装
 
 ## 联系我
 
