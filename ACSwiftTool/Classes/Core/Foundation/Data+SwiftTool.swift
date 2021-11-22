@@ -41,6 +41,17 @@ public extension Data {
     func jsonObject(options: JSONSerialization.ReadingOptions = []) throws -> Any {
         return try JSONSerialization.jsonObject(with: self, options: options)
     }
+    
+    /// Data类型->Dictionary字典
+    func toDictionary() -> Dictionary<String, Any>? {
+        do {
+            let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
+            let dic = json as! Dictionary<String, Any>
+            return dic
+        } catch _ {
+            return nil
+        }
+    }
 
 }
 #endif

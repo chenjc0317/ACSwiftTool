@@ -26,6 +26,10 @@ extension UIScrollView {
         mj_header?.endRefreshing()
     }
     
+    /// 隐藏头视图
+    func hideHeaderRefresh() {
+        mj_header?.isHidden = true
+    }
     // MARK: - 脚部
     /// 添加脚部自动刷新,一般用这个
     ///
@@ -61,5 +65,27 @@ extension UIScrollView {
     /// 提示没有更多的数据
     func endRefreshingWithNoMoreData() {
         mj_footer?.endRefreshingWithNoMoreData()
+    }
+    
+    /// 隐藏尾视图
+    func hideFooterRefresh() {
+        mj_footer?.isHidden = true
+    }
+    
+    // MARK: - 左滑
+    /// 添加左滑刷新
+    /// - Parameter closure: 刷新回调
+    func addTrailerRefresh(closure: @escaping MJRefreshComponentAction){
+        let trailer = MJRefreshNormalTrailer(refreshingBlock: closure)
+        mj_trailer = trailer
+    }
+    /// 开始左滑刷新
+    func beginTrailerRefresh() {
+        mj_trailer?.beginRefreshing()
+    }
+
+    /// 结束左滑刷新
+    func endTrailerRefresh() {
+        mj_trailer?.endRefreshing()
     }
 }

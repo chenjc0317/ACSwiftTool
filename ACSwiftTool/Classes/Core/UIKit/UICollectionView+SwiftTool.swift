@@ -8,7 +8,7 @@
 
 import UIKit
 extension UICollectionView {
-
+    
     
     /// 注册Cell
     ///
@@ -24,7 +24,7 @@ extension UICollectionView {
     public func registerNib<T: UICollectionViewCell>(_ cell: T.Type, bundle: Bundle? = nil) {
         register(UINib(nibName: "\(cell)", bundle: bundle), forCellWithReuseIdentifier: "\(cell)")
     }
-
+    
     /// 注册Header或者Footer
     ///
     /// - Parameters:
