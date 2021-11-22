@@ -1,5 +1,5 @@
 //
-//  SandboxTool.swift
+//  ACSandboxTool.swift
 //  ACSwiftTool_Example
 //
 //  Created by Ac on 2021/6/18.
@@ -8,9 +8,9 @@
 // MARK: 沙盒
 import UIKit
 @objcMembers
-open class SandboxTool: NSObject {
+open class ACSandboxTool: NSObject {
     
-    public static let shared = SandboxTool()
+    public static let shared = ACSandboxTool()
     
     /// 禁止外部调用init初始化方法
     private override init(){
@@ -65,7 +65,7 @@ open class SandboxTool: NSObject {
 public extension SwiftTool{
     /// 缓存路径
     static var cachePath:String {
-        return SandboxTool.shared.cachesDirectory + "/" + "SSCache"
+        return ACSandboxTool.shared.cachesDirectory + "/" + "SSCache"
     }
     /// Set 缓存数据
     static func asyncSetCache(jsonResponse: AnyObject, URL: String, subPath: String?, completed:@escaping (Bool) -> ()) {

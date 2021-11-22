@@ -28,6 +28,14 @@ extension UIFont{
     public class func sc_thin(size:CGFloat)->UIFont{
         return UIFont(name: "PingFangSC-Thin", size: size) ?? UIFont.systemFont(ofSize: size)
     }
+    /// 苹方-简 黑体粗
+    public class func sc_bold(size:CGFloat)->UIFont{
+        return UIFont(name: "PingFang-SC-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
+    /// 苹方-简
+    public class func sc_heavy(size:CGFloat)->UIFont{
+        return UIFont(name: "PingFang-SC-Heavy", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
     public class func arial(size:CGFloat)->UIFont{
         return UIFont(name: "Arial-ItalicMT", size: size) ?? UIFont.systemFont(ofSize: size)
     }
@@ -36,15 +44,5 @@ extension UIFont{
     }
     public class func pangmen_blod(size:CGFloat)->UIFont{
         return UIFont(name: "PangMenZhengDao-3", size: size) ?? UIFont.systemFont(ofSize: size)
-    }
-    
-    
-    /// 苹方-简 黑体粗
-    public class func sc_bold(size:CGFloat)->UIFont{
-        return UIFont(name: "PingFang-SC-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
-    }
-    /// 苹方-简
-    public class func sc_heavy(size:CGFloat)->UIFont{
-        return UIFont(name: "PingFang-SC-Heavy", size: size) ?? UIFont.systemFont(ofSize: size)
     }
 }

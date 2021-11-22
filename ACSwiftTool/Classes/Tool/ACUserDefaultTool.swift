@@ -21,14 +21,14 @@ public enum DefaultWrapperKey {
 ///         var name = ""
 ///         required init() {}
 ///     }
-///     @UserDefaultTool(key: .handyJSON("person"), defaultValue: Person())
+///     @ACUserDefaultTool(key: .handyJSON("person"), defaultValue: Person())
 ///     var person
 ///
 ///     // Base Type
-///     @UserDefaultTool(key: .base("username"), defaultValue: "")
+///     @ACUserDefaultTool(key: .base("username"), defaultValue: "")
 ///     var username: String
 @propertyWrapper
-public struct UserDefaultTool<T: HandyJSON> {
+public struct ACUserDefaultTool<T: HandyJSON> {
     let key: DefaultWrapperKey
     let defaultValue: T
     public init(key: DefaultWrapperKey, defaultValue: T) {

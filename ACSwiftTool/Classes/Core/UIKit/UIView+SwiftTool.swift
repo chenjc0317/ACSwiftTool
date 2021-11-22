@@ -14,24 +14,18 @@ public enum LinePosition: Int {
     case bottom = 1
     case center = 2
 }
-
-/// UIView的构造和函数
+// MARK: - add
 extension UIView {
-    
-    public convenience init(backgroundColor: UIColor = UIColor.white, cornerRadius: CGFloat? = nil) {
-        self.init()
-        self.backgroundColor = backgroundColor
-        
-        if let radius = cornerRadius {
-            self.cornerRadius = radius
+    /// 批量添加子控件
+    ///
+    /// - Parameter views: 控件
+    public func addSubviews(_ views: [UIView]) {
+        var iterator = views.makeIterator()
+        while let view = iterator.next() {
+            addSubview(view)
         }
     }
-    
-    /// 从nib初始化一个View
-    public static func nib<T>(bundle: Bundle? = nil) -> T {
-        return UINib(nibName: self.named, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! T
-    }
-    
+
     /// 添加阴影
     public func shadow(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.2) {
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
@@ -44,7 +38,6 @@ extension UIView {
     }
     /// 添加阴影图层
     public func shadowLayer(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5,cornerRadius:CGFloat,bounds:CGRect) {
-        
         let layer = CALayer()
         layer.frame = bounds
         layer.shadowColor = color.cgColor
@@ -56,7 +49,6 @@ extension UIView {
         layer.backgroundColor = UIColor.white.cgColor
         self.layer.insertSublayer(layer, at: 0)
         self.layer.addSublayer(layer)
-        
     }
     
     
@@ -81,52 +73,21 @@ extension UIView {
         }
         return line
     }
-    
-    // MARK: - 添加点击手势
-    private struct AssociatedKeys {
-        static var tapGesture = false
-    }
-    public typealias NormalClosure = () -> ()
-    /// 添加点击手势
-    /// - Parameter handler: 点击回调
-    func addTapGesture(handler: @escaping NormalClosure) {
-        isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        addGestureRecognizer(tap)
-        objc_setAssociatedObject(self, &AssociatedKeys.tapGesture, handler, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-    }
-    
-    @objc func tapGesture(_ gesture:UITapGestureRecognizer) {
-        if let closure = objc_getAssociatedObject(self, &AssociatedKeys.tapGesture) as? NormalClosure {
-            closure()
-        }
-    }
-    
-    /// 添加长按手势
-    @discardableResult
-    public func addLongPressGestureRecognizer(target : Any?, action : Selector?, pressDuration: Double = 1) -> UILongPressGestureRecognizer {
-        
-        let longPressGesture = UILongPressGestureRecognizer.init(target: target, action: action)
-        longPressGesture.minimumPressDuration    = pressDuration;
-        self.addGestureRecognizer(longPressGesture)
-        self.isUserInteractionEnabled = true
-        return longPressGesture
-    }
-    
-    /// 获取view的UIViewController
-    public func parentViewController()->UIViewController?{
-        for view in sequence(first: self.superview, next: {$0?.superview}){
-            if let responder = view?.next{
-                if responder.isKind(of: UIViewController.self){
-                    return responder as? UIViewController
-                }
-            }
-        }
-        return nil
-    }
+}
+// MARK: - set
+extension UIView {
     /// 添加顶部mask
     public func topCornerRadius(rect:CGRect,radius:CGFloat){
         cornerRadius(position: [.topLeft, .topRight], cornerRadius: radius, roundedRect:rect)
+    }
+    
+    /// 指定位置圆角
+    public func addRoundedCorners(_ corners: UIRectCorner,radius: CGFloat) {
+        let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = self.bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
     }
     
     /// 使用贝塞尔曲线设置圆角
@@ -136,6 +97,13 @@ extension UIView {
         layer.frame = roundedRect
         layer.path = path.cgPath
         self.layer.mask = layer
+    }
+    
+    /// 设置边框线颜色
+    public func border(color: UIColor, width: CGFloat = 1.0) {
+        self.layer.masksToBounds = true
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
     }
     
     /// 设置渐变色
@@ -165,21 +133,81 @@ extension UIView {
         setGradient(gradientLayer)
         return gradientLayer
     }
+}
+extension UIView {
+    /// 加载Xib
+    public func loadViewFromNib() -> UIView {
+        let className = type(of: self)
+        let bundle = Bundle(for: className)
+        let name = NSStringFromClass(className).components(separatedBy: ".").last
+        let nib = UINib(nibName: name!, bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        return view
+    }
+    
+    /// 获取view的UIViewController
+    public func parentViewController()->UIViewController?{
+        for view in sequence(first: self.superview, next: {$0?.superview}){
+            if let responder = view?.next{
+                if responder.isKind(of: UIViewController.self){
+                    return responder as? UIViewController
+                }
+            }
+        }
+        return nil
+    }
+    
+    /// 生成截图
+    public func screenShot() -> UIImage? {
+        guard bounds.size.height > 0 && bounds.size.width > 0 else {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(bounds.size, true, UIScreen.main.scale)
+        // 之前解决不了的模糊问题就是出在这个方法上
+        // layer.render(in: UIGraphicsGetCurrentContext()!)
+        // Renders a snapshot of the complete view hierarchy as visible onscreen into the current context.
+        // 高清截图
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
     
 }
-
+// MARK: - UIView + TapGesture
 extension UIView {
-    /// 设置圆角
-    @IBInspectable
-    public var cornerRadius: CGFloat {
-        set {
-            self.layer.masksToBounds = true
-            self.layer.cornerRadius = newValue
-        }
-        get {
-            return self.layer.cornerRadius
+    private struct AssociatedKeys {
+        static var tapGesture = false
+    }
+    public typealias NormalClosure = () -> ()
+    /// 添加点击手势
+    /// - Parameter handler: 点击回调
+    func addTapGesture(handler: @escaping NormalClosure) {
+        isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        addGestureRecognizer(tap)
+        objc_setAssociatedObject(self, &AssociatedKeys.tapGesture, handler, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+    
+    @objc func tapGesture(_ gesture:UITapGestureRecognizer) {
+        if let closure = objc_getAssociatedObject(self, &AssociatedKeys.tapGesture) as? NormalClosure {
+            closure()
         }
     }
+    
+    /// 添加长按手势
+    @discardableResult
+    public func addLongPressGestureRecognizer(target : Any?, action : Selector?, pressDuration: Double = 1) -> UILongPressGestureRecognizer {
+        let longPressGesture = UILongPressGestureRecognizer.init(target: target, action: action)
+        longPressGesture.minimumPressDuration    = pressDuration;
+        self.addGestureRecognizer(longPressGesture)
+        self.isUserInteractionEnabled = true
+        return longPressGesture
+    }
+}
+
+// MARK: - @IBInspectable
+extension UIView {
     /// 边框宽度
     @IBInspectable
     var borderWidth: CGFloat {
@@ -207,7 +235,7 @@ extension UIView {
             }
         }
     }
-    // 设置阴影
+    /// 阴影半径
     @IBInspectable
     var shadowRadius: CGFloat {
         get {
@@ -217,7 +245,7 @@ extension UIView {
             layer.shadowRadius = newValue
         }
     }
-    
+    /// 阴影不透明度
     @IBInspectable
     var shadowOpacity: Float {
         get {
@@ -227,7 +255,7 @@ extension UIView {
             layer.shadowOpacity = newValue
         }
     }
-    
+    /// 阴影偏移
     @IBInspectable
     var shadowOffset: CGSize {
         get {
@@ -237,7 +265,7 @@ extension UIView {
             layer.shadowOffset = newValue
         }
     }
-    
+    /// 阴影颜色
     @IBInspectable
     var shadowColor: UIColor? {
         get {
@@ -254,28 +282,9 @@ extension UIView {
             }
         }
     }
-    /// 指定位置圆角
-    func addRoundedCorners(_ corners: UIRectCorner,radius: CGFloat) {
-        let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = self.bounds
-        maskLayer.path = maskPath.cgPath
-        self.layer.mask = maskLayer
-    }
-    /// 设置边框线颜色
-    public func border(color: UIColor, width: CGFloat = 1.0) {
-        self.layer.masksToBounds = true
-        self.layer.borderColor = color.cgColor
-        self.layer.borderWidth = width
-    }
-    ///将当前视图转为UIImage
-    public func screenshots() -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { (rendererContext) in
-            layer.render(in: rendererContext.cgContext)
-        }
-    }
 }
+
+
 // MARK: - view + SVProgressHUD
 extension UIView{
     // MARK: - SVProgressHUD提示设置
@@ -324,8 +333,9 @@ extension UIView{
         SVProgressHUD.dismiss(withDelay: withDelay)
     }
 }
-// MARK: - view + BlurView
 
+
+// MARK: - view + BlurView
 extension UIView {
     
     private struct BlurAssociatedKeys {

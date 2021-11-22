@@ -1,6 +1,5 @@
 //
 //  ACSwiftTool.swift
-//  ACSwiftTool_Example
 //
 //  Created by Ac on 2021/6/18.
 //  Copyright © 2021 CocoaPods. All rights reserved.
@@ -15,10 +14,10 @@ import UIKit
  390pt（全面屏）、
  428pt（全面屏）
  */
-public typealias SwiftTool = ACSwiftTool
+public typealias ACSwiftTool = SwiftTool
 @objcMembers
-public class ACSwiftTool: NSObject {
-    
+public class SwiftTool: NSObject {
+    /// 信号量
     public static let lock = DispatchSemaphore(value: 1)
     
     /// 屏幕宽
@@ -30,13 +29,12 @@ public class ACSwiftTool: NSObject {
     
     /// app 显示名称
     public static var displayName: String {
-        // http://stackoverflow.com/questions/28254377/get-app-name-in-swift
-        return Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "SpeedySwift"
+        return Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "xxx"
     }
     
     /// app 的bundleid
     public static var bundleID: String {
-        return Bundle.main.bundleIdentifier ?? "top.tlien.ss"
+        return Bundle.main.bundleIdentifier ?? "xxx.xxx.xx"
     }
     
     /// build号
@@ -151,6 +149,34 @@ public class ACSwiftTool: NSObject {
         }
         let vc = window?.rootViewController
         return topVC(vc)
+    }
+    ///  获取当前显示vc
+    public static func currentVC() -> UIViewController? {
+        var result: UIViewController? = nil
+        // 获取默认的window
+        var window = UIApplication.shared.keyWindow
+        // app默认windowLevel是UIWindowLevelNormal，如果不是，找到它。
+        if window?.windowLevel != .normal {
+            let windows = UIApplication.shared.windows
+            for tmpWin in windows {
+                if tmpWin.windowLevel == .normal {
+                    window = tmpWin
+                    break
+                }
+            }
+        }
+        // 获取window的rootViewController
+        result = window?.rootViewController
+        while (result?.presentedViewController != nil) {
+            result = result?.presentedViewController
+        }
+        if result is UITabBarController {
+            result = (result as? UITabBarController)?.selectedViewController
+        }
+        if result is UINavigationController {
+            result = (result as? UINavigationController)?.visibleViewController
+        }
+        return result
     }
     /// 全场toast
     public static func toast(message:String){

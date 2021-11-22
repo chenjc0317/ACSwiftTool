@@ -8,95 +8,76 @@
 
 import Foundation
 /// 日期类型
-public enum DateTypeString {
-    /// yyyy年MM月dd日
-    case YMD
-    /// yyyy-MM-dd
-    case ymd
-    /// yyyy-MM-dd HH:mm:ss
+public enum DateStringType {
+    /// 0000-00-d00 00:00:00
     case YMDHMS
-    /// yyyy-MM
+    /// 0000-00-00
+    case YMD
+    /// 0000-00
     case YM
-    /// yyyy
+    /// 0000
     case YYYY
+    /// 0000年00月00日
+    case ymd
 }
 
 public extension Date {
     /// 时间转换
-    func toString(_ type: DateTypeString) -> String {
+    func toString(_ type: DateStringType) -> String {
         let formatter = DateFormatter()
         switch type {
-        case .YMD:
-            formatter.dateFormat = "yyyy年MM月dd日"
-        case .ymd:
-            formatter.dateFormat = "yyyy-MM-dd"
         case .YMDHMS:
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        case .YMD:
+            formatter.dateFormat = "yyyy-MM-dd"
         case .YM:
             formatter.dateFormat = "yyyy-MM"
         case .YYYY:
             formatter.dateFormat = "yyyy"
+        case .ymd:
+            formatter.dateFormat = "yyyy年MM月dd日"
         }
         return formatter.string(from: self)
     }
-    /// 当前时间间隔
+
+    /// 当前时间戳
     func currentTimeInterval() -> Int64 {
-        let now = Date()
-        let timeInterval: TimeInterval = now.timeIntervalSince1970
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
         return Int64(timeInterval)
     }
+
+    /// 当前时间戳
+    func currentTimeInterval() -> UInt32 {
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
+        return UInt32(timeInterval)
+    }
+    
     /// 当前时间
     func currentTime() -> String {
-        let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyyMMddHHmmss"
-        return timeFormatter.string(from: date)
-    }
-    /// 当前日期
-    func currentDate(_ type: DateTypeString) -> String {
-        let date = Date()
-        let timeFormatter = DateFormatter()
-        switch type {
-        case .YMD:
-            timeFormatter.dateFormat = "yyyy年MM月dd日"
-        case .ymd:
-            timeFormatter.dateFormat = "yyyy-MM-dd"
-        case .YMDHMS:
-            timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        case .YM:
-            timeFormatter.dateFormat = "yyyy-MM"
-        case .YYYY:
-            timeFormatter.dateFormat = "yyyy"
-        }
-        return timeFormatter.string(from: date)
+        return timeFormatter.string(from: self)
     }
     /// 格式化时间
-    func formatterTimeToDate(stringTime: String) -> Date {
-        let dfmatter = DateFormatter()
-        dfmatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dfmatter.timeZone = TimeZone(abbreviation: "UTC") ?? TimeZone.current
-        let date = dfmatter.date(from: stringTime) ?? Date()
-        return date
-    }
-    /// 格式化时间
-    func formatterTimeToDate(_ type: DateTypeString,stringTime: String) -> Date {
-        let dfmatter = DateFormatter()
+    func formatterTimeToDate(_ type: DateStringType, stringTime: String) -> Date {
+        let formatter = DateFormatter()
         switch type {
-        case .YMD:
-            dfmatter.dateFormat = "yyyy年MM月dd日"
-        case .ymd:
-            dfmatter.dateFormat = "yyyy-MM-dd"
         case .YMDHMS:
-            dfmatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        case .YMD:
+            formatter.dateFormat = "yyyy-MM-dd"
         case .YM:
-            dfmatter.dateFormat = "yyyy-MM"
+            formatter.dateFormat = "yyyy-MM"
         case .YYYY:
-            dfmatter.dateFormat = "yyyy"
+            formatter.dateFormat = "yyyy"
+        case .ymd:
+            formatter.dateFormat = "yyyy年MM月dd日"
         }
-        dfmatter.timeZone = TimeZone(abbreviation: "UTC") ?? TimeZone.current
-        let date = dfmatter.date(from: stringTime) ?? Date()
+        formatter.timeZone = TimeZone(abbreviation: "UTC") ?? TimeZone.current
+        let date = formatter.date(from: stringTime) ?? Date()
         return date
     }
+
     /// 时间戳转换字符串
     func timeStampToString(timeStamp: String) -> String {
         let timeInterval: TimeInterval = TimeInterval(timeStamp) ?? Date().timeIntervalSince1970
@@ -105,5 +86,5 @@ public extension Date {
         let date = Date(timeIntervalSince1970: timeInterval)
         return dfmatter.string(from: date)
     }
-    
+
 }
