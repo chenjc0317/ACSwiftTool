@@ -208,6 +208,17 @@ extension UIView {
 
 // MARK: - @IBInspectable
 extension UIView {
+    /// 设置圆角
+    @IBInspectable
+    public var cornerRadius: CGFloat {
+        set {
+            self.layer.masksToBounds = true
+            self.layer.cornerRadius = newValue
+        }
+        get {
+            return self.layer.cornerRadius
+        }
+    }
     /// 边框宽度
     @IBInspectable
     var borderWidth: CGFloat {
@@ -324,7 +335,8 @@ extension UIView{
     /// 关闭提示
     public static func dismissHUD() {
         SVProgressHUD.dismiss()
-        // SVProgressHUD.setMinimumSize(.zero)
+        //重置操作模式
+        SVProgressHUD.setDefaultMaskType(.clear)
     }
     
     /// 关闭提示

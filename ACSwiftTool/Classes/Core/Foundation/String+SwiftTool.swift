@@ -199,6 +199,10 @@ public extension String {
         }
         return resultStr
     }
+    /// 截取 从头到i位置
+    func substring(to:Int) -> String{
+        return self[0..<to]
+    }
     /// 截取 从i到尾部
     func substring(from:Int) -> String{
         return self[from..<self.count]

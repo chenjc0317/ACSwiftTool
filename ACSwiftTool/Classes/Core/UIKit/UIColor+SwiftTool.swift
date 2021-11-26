@@ -90,4 +90,17 @@ extension UIColor {
     public convenience init(r: CGFloat, g: CGFloat, b: CGFloat,a:CGFloat) {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
     }
+    
+    /// 左右渐变色
+    public static func gradient(left: UIColor, right: UIColor, rect: CGRect) -> CAGradientLayer {
+        func gradientLayer(rect: CGRect) -> CAGradientLayer {
+            let colorLayer = CAGradientLayer()
+            colorLayer.frame = rect
+            colorLayer.colors = [left.cgColor, right.cgColor]
+            colorLayer.startPoint = CGPoint(x: 0, y: 0.5)
+            colorLayer.endPoint = CGPoint(x: 1, y: 0.5)
+            return colorLayer
+        }
+        return gradientLayer(rect: rect)
+    }
 }

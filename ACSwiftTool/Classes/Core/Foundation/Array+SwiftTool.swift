@@ -34,3 +34,12 @@ extension Sequence where Element: Equatable {
         self.filter(isIncluded).count
     }
 }
+// MARK:越界保护
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        if self.count > index {
+            return self[index]
+        }
+        return nil
+    }
+}
