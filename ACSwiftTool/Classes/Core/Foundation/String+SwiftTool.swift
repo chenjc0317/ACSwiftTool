@@ -26,12 +26,11 @@ public extension String {
     }
     /// base64 编码
     var base64Encoded: String? {
-        // https://github.com/Reza-Rg/Base64-Swift-Extension/blob/master/Base64.swift
         let plainData = data(using: .utf8)
         return plainData?.base64EncodedString()
     }
     /// md5
-    var  md5:String{
+    var  md5:String {
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -51,7 +50,6 @@ public extension String {
     ///        "Hello 😀".containEmoji -> true
     ///
     var isContainEmoji: Bool {
-        // http://stackoverflow.com/questions/30757193/find-out-if-character-in-string-is-emoji
         for scalar in unicodeScalars {
             return self.containEmoji(scalar)
         }
@@ -61,10 +59,11 @@ public extension String {
     var int: Int? {
         return Int(self)
     }
-    
+    /// 转Url
     var netUrl: URL? {
         return URL(string: self)
     }
+    /// 转本地URL
     var localURL:URL?{
         return URL(fileURLWithPath: self, isDirectory: true)
     }

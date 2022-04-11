@@ -14,6 +14,8 @@ extension UIScrollView {
     /// - Parameter closure: 刷新回调
     func addHeaderRefresh(closure: @escaping MJRefreshComponentAction) {
         let header = MJRefreshNormalHeader(refreshingBlock: closure)
+        // 默认不显示刷新时间
+        header.lastUpdatedTimeLabel?.isHidden = true
         mj_header = header
     }
     /// 开始头部刷新
@@ -36,6 +38,8 @@ extension UIScrollView {
     /// - Parameter closure: 刷新回调
     func addAutoFooterRefresh(closure: @escaping MJRefreshComponentAction) {
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: closure)
+        /// 设置尾部刷新控件,更新为无感知加载更多
+        footer.triggerAutomaticallyRefreshPercent = -1
         mj_footer = footer
     }
     
@@ -77,6 +81,9 @@ extension UIScrollView {
     /// - Parameter closure: 刷新回调
     func addTrailerRefresh(closure: @escaping MJRefreshComponentAction){
         let trailer = MJRefreshNormalTrailer(refreshingBlock: closure)
+        trailer.setTitle("滑动查看更多", for: .idle)
+        trailer.setTitle("释放查看更多", for: .pulling)
+        trailer.setTitle("正在查看更多", for: .refreshing)
         mj_trailer = trailer
     }
     /// 开始左滑刷新

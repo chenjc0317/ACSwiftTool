@@ -7,7 +7,7 @@
 
 import UIKit
 extension UIButton {
-    
+    /// 图片
     public var image : UIImage? {
         set {
             self.setImage(newValue, for: .normal)
@@ -16,7 +16,7 @@ extension UIButton {
             return self.image(for: .normal)!
         }
     }
-    
+    /// 背景图片
     public var backgroundImage : UIImage? {
         set {
             self.setBackgroundImage(newValue, for: .normal)
@@ -25,7 +25,7 @@ extension UIButton {
             return self.backgroundImage(for: .normal)!
         }
     }
-    
+    /// 标题
     public var title : String? {
         set {
             self.setTitle(newValue, for: .normal)
@@ -34,7 +34,7 @@ extension UIButton {
             return self.title(for: .normal) ?? ""
         }
     }
-    
+    /// 标题颜色
     public var titleColor : UIColor? {
         set {
             self.setTitleColor(newValue, for: .normal)
@@ -43,7 +43,7 @@ extension UIButton {
             return self.titleColor(for: .normal)!
         }
     }
-    
+    /// 标题字体
     public var titleFont : UIFont? {
         set {
             self.titleLabel?.font = newValue
@@ -54,9 +54,9 @@ extension UIButton {
         }
     }
 }
+// MARK:- UIButton 图片 与 title 位置关系
 extension UIButton {
     
-    // MARK:- 三、UIButton 图片 与 title 位置关系
     /// 图片 和 title 的布局样式
     enum ImageTitleLayout {
         case imgTop
@@ -65,7 +65,6 @@ extension UIButton {
         case imgRight
     }
     
-    // MARK: 3.1、设置图片和 title 的位置关系(提示：title和image要在设置布局关系之前设置)
     /// 设置图片和 title 的位置关系(提示：title和image要在设置布局关系之前设置)
     /// - Parameters:
     ///   - layout: 布局

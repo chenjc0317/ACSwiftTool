@@ -14,34 +14,26 @@ import UIKit
  390pt（全面屏）、
  428pt（全面屏）
  */
+/// 别名
 public typealias ACSwiftTool = SwiftTool
+
 @objcMembers
 public class SwiftTool: NSObject {
+    // MARK: - 设备相关
     /// 信号量
     public static let lock = DispatchSemaphore(value: 1)
-    
-    /// 屏幕宽
-    public static let screenWidth = UIScreen.main.bounds.size.width
-    /// 屏幕高
-    public static let screenHeight = UIScreen.main.bounds.size.height
-    /// 视图
-    public static let bounds = UIScreen.main.bounds
-    
     /// app 显示名称
     public static var displayName: String {
         return Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "xxx"
     }
-    
     /// app 的bundleid
     public static var bundleID: String {
         return Bundle.main.bundleIdentifier ?? "xxx.xxx.xx"
     }
-    
     /// build号
     public static var build: String {
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? "1"
     }
-    
     /// app版本号
     public static var versionS: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -71,12 +63,17 @@ public class SwiftTool: NSObject {
         }
         return isX
     }
-    
+    // MARK: - 视图相关
+    /// 视图
+    public static let bounds = UIScreen.main.bounds
+    /// 屏幕宽
+    public static let screenWidth = UIScreen.main.bounds.size.width
+    /// 屏幕高
+    public static let screenHeight = UIScreen.main.bounds.size.height
     /// TableBar高度
     public static var tabBarHeight : CGFloat {
         return statusBarHeight == 44 ? 83 : 49
     }
-    
     /// TableBar距底部区域高度
     public static var safeBottomHeight : CGFloat {
         var bottomH : CGFloat = 0.0
@@ -85,36 +82,34 @@ public class SwiftTool: NSObject {
         }
         return bottomH
     }
-    
     /// 状态栏的高度
     public static var statusBarHeight : CGFloat {
         var height = UIApplication.shared.statusBarFrame.size.height
         height = height < 20 ? (safeBottomHeight > 0 ? 44 : 20) : height
         return height
     }
-    
     /// 导航栏的高度
     public static var navBarHeight: CGFloat {
         return 44.0
     }
-    
     /// 状态栏和导航栏的高度
     public static var statusWithNavBarHeight : CGFloat {
         let heigth = statusBarHeight + navBarHeight
         return heigth
     }
-    
+    /// 比例宽度
     public static func scaleW(_ width: CGFloat,fit:CGFloat = 375.0) -> CGFloat {
         return screenWidth / fit * width
     }
-     
+    /// 比例高度
     public static func scaleH(_ height: CGFloat,fit:CGFloat = 812.0) -> CGFloat {
         return screenWidth / fit * height
     }
+    /// 比例
     public static func scale(_ value: CGFloat) -> CGFloat {
         return scaleW(value)
     }
-    
+    // MARK: - 控制器相关
     /// 根据控制器获取 顶层控制器
     public static func topVC(_ viewController: UIViewController?) -> UIViewController? {
         guard let currentVC = viewController else {
@@ -134,6 +129,7 @@ public class SwiftTool: NSObject {
             return currentVC
         }
     }
+    
     /// 获取顶层控制器 根据window
     public static func topVC() -> UIViewController? {
         var window = UIApplication.shared.keyWindow
@@ -150,6 +146,7 @@ public class SwiftTool: NSObject {
         let vc = window?.rootViewController
         return topVC(vc)
     }
+    
     ///  获取当前显示vc
     public static func currentVC() -> UIViewController? {
         var result: UIViewController? = nil
@@ -178,19 +175,21 @@ public class SwiftTool: NSObject {
         }
         return result
     }
+    
     /// 全场toast
-    public static func toast(message:String){
-        if let view = UIApplication.shared.keyWindow{
+    public static func toast(message:String) {
+        if let view = UIApplication.shared.keyWindow {
             view.toast(message: message)
         }
     }
+    
     /// 当用户截屏时的监听
     public static func didTakeScreenShot(_ action: @escaping (_ notification: Notification) -> Void) {
         // http://stackoverflow.com/questions/13484516/ios-detection-of-screenshot
         _ = NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification,
                                                    object: nil,
                                                    queue: OperationQueue.main) { notification in
-                                                    action(notification)
+            action(notification)
         }
     }
     /// 主动崩溃

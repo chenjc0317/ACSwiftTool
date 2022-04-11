@@ -9,11 +9,11 @@
 import UIKit
 import Toast_Swift
 /// Tost配置项
-public class ACToastConfigure{
+public class ACToastConfigure {
     static let shared = ACToastConfigure()
     private init(){}
     /// 背景色
-    public var backgroundColor:UIColor = .black
+    public var backgroundColor: UIColor = .black
     /// 字体颜色
     public var textColor:UIColor = .white
     /// 标题字体大小 默认15pt
@@ -21,7 +21,7 @@ public class ACToastConfigure{
     /// 信息字体大小 默认15pt
     public var messageFontSize: CGFloat = 15
     
-    public var style:ToastStyle{
+    public var style: ToastStyle {
         var style = ToastStyle()
         style.backgroundColor = ACToastConfigure.shared.backgroundColor
         style.titleColor = ACToastConfigure.shared.textColor

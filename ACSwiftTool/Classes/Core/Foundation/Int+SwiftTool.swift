@@ -8,11 +8,11 @@
 
 import Foundation
 public extension Int{
-    var string:String{
+    var string: String {
         return "\(self)"
     }
     
-    var random:Int{
+    var random: Int {
         return Int(arc4random())%self
     }
 }

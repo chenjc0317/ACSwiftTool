@@ -14,6 +14,7 @@ public enum LinePosition: Int {
     case bottom = 1
     case center = 2
 }
+
 // MARK: - add
 extension UIView {
     /// 批量添加子控件
@@ -76,6 +77,7 @@ extension UIView {
 }
 // MARK: - set
 extension UIView {
+    
     /// 添加顶部mask
     public func topCornerRadius(rect:CGRect,radius:CGFloat){
         cornerRadius(position: [.topLeft, .topRight], cornerRadius: radius, roundedRect:rect)
@@ -194,6 +196,7 @@ extension UIView {
             closure()
         }
     }
+    
     
     /// 添加长按手势
     @discardableResult
@@ -334,9 +337,8 @@ extension UIView{
     
     /// 关闭提示
     public static func dismissHUD() {
-        SVProgressHUD.dismiss()
-        //重置操作模式
         SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.dismiss()
     }
     
     /// 关闭提示

@@ -8,7 +8,7 @@
 
 import UIKit
 extension UILabel {
-    
+    /// 自定义初始化
     public convenience init(text : String?, textColor : UIColor?, textFont : UIFont?, textAlignment: NSTextAlignment = .left, numberLines: Int = 1) {
         self.init()
         self.text = text
@@ -20,7 +20,10 @@ extension UILabel {
     }
 
     /// 预计高度
-    public func pre_h(maxWidth: CGFloat,maxLine:Int = 0) -> CGFloat {
+    /// - Parameters:
+    ///   - maxWidth: 最大宽度
+    ///   - maxLine: 最大列
+    public func predictHeight(maxWidth: CGFloat,maxLine:Int = 0) -> CGFloat {
         let label = UILabel(frame: CGRect(
             x: 0,
             y: 0,
@@ -38,8 +41,12 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.height
     }
+    
     /// 预计宽度
-    public func pre_w(maxHeight: CGFloat,maxLine:Int = 0) -> CGFloat {
+    /// - Parameters:
+    ///   - maxHeight: 最大高度
+    ///   - maxLine: 最大列
+    public func predictWidth(maxHeight: CGFloat,maxLine:Int = 0) -> CGFloat {
         let label = UILabel(frame: CGRect(
             x: 0,
             y: 0,
@@ -57,8 +64,9 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.width
     }
+    
     /// 改变行间距
-    func changeLineSpace(space:CGFloat) {
+    public func changeLineSpace(space: CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
@@ -72,7 +80,7 @@ extension UILabel {
     }
 
     /// 改变字间距
-    func changeWordSpace(space:CGFloat) {
+    public func changeWordSpace(space: CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
@@ -85,7 +93,7 @@ extension UILabel {
     }
 
     /// 改变字间距和行间距  
-    func changeSpace(lineSpace:CGFloat, wordSpace:CGFloat) {
+    public func changeSpace(lineSpace:CGFloat, wordSpace:CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
