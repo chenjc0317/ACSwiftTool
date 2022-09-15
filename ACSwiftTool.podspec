@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ACSwiftTool'
-  s.version          = '2.5.0'
+  s.version          = '2.5.1'
   s.summary          = 'This is an App development tool library based on Swift language.'
 
   s.description      = <<-DESC

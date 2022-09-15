@@ -12,23 +12,23 @@ import SwiftyFitsize
 extension UIFont {
     /// 苹方-简 常规体
     public class func sc_regular(size:CGFloat) -> UIFont {
-        return (UIFont(name: "PingFangSC-Regular", size: size) ?? UIFont.systemFont(ofSize: size))~
+        return (UIFont(name: "PingFang-SC-Regular", size: size) ?? UIFont.systemFont(ofSize: size))~
     }
     /// 苹方-简 中粗体
     public class func sc_semibold(size:CGFloat) -> UIFont {
-        return (UIFont(name: "PingFangSC-Semibold", size: size) ?? UIFont.systemFont(ofSize: size))~
+        return (UIFont(name: "PingFang-SC-Semibold", size: size) ?? UIFont.systemFont(ofSize: size))~
     }
     /// 苹方-简 中黑体
     public class func sc_medium(size:CGFloat) -> UIFont {
-        return (UIFont(name: "PingFangSC-Medium", size: size) ?? UIFont.systemFont(ofSize: size))~
+        return (UIFont(name: "PingFang-SC-Medium", size: size) ?? UIFont.systemFont(ofSize: size))~
     }
     /// 苹方-简 极细体
     public class func sc_ultralight(size:CGFloat) -> UIFont {
-        return (UIFont(name: "PingFangSC-Ultralight", size: size) ?? UIFont.systemFont(ofSize: size))~
+        return (UIFont(name: "PingFang-SC-Ultralight", size: size) ?? UIFont.systemFont(ofSize: size))~
     }
     /// 苹方-简 纤细体
     public class func sc_thin(size:CGFloat) -> UIFont {
-        return (UIFont(name: "PingFangSC-Thin", size: size) ?? UIFont.systemFont(ofSize: size))~
+        return (UIFont(name: "PingFang-SC-Thin", size: size) ?? UIFont.systemFont(ofSize: size))~
     }
     /// 苹方-简 黑体粗
     public class func sc_bold(size:CGFloat) -> UIFont {

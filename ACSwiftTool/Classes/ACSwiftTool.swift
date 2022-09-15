@@ -56,12 +56,19 @@ public class SwiftTool: NSObject {
     }
     /// 判断设备是不是iPhoneX
     public static var isX : Bool {
-        var isX = false
-        if #available(iOS 11.0, *) {
-            let bottom : CGFloat = UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0
-            isX = bottom > 0.0
+        var iPhoneXSeries = false
+        if UIDevice.current.userInterfaceIdiom != UIUserInterfaceIdiom.phone {
+            return iPhoneXSeries
         }
-        return isX
+
+        if #available(iOS 11.0, *)  {
+            if let bottom = UIApplication.shared.delegate?.window??.safeAreaInsets.bottom {
+                if bottom > CGFloat(0.0) {
+                    iPhoneXSeries = true
+                }
+            }
+        }
+        return iPhoneXSeries
     }
     // MARK: - 视图相关
     /// 视图
@@ -74,19 +81,31 @@ public class SwiftTool: NSObject {
     public static var tabBarHeight : CGFloat {
         return statusBarHeight == 44 ? 83 : 49
     }
-    /// TableBar距底部区域高度
+    /// 底部安全区高度
     public static var safeBottomHeight : CGFloat {
-        var bottomH : CGFloat = 0.0
-        if isX {
-            bottomH = 34.0
+        if #available(iOS 13.0, *) {
+            let scene = UIApplication.shared.connectedScenes.first
+            guard let windowScene = scene as? UIWindowScene else { return 0 }
+            guard let window = windowScene.windows.first else { return 0 }
+            return window.safeAreaInsets.bottom
+        } else if #available(iOS 11.0, *) {
+            guard let window = UIApplication.shared.windows.first else { return 0 }
+            return window.safeAreaInsets.bottom
         }
-        return bottomH
+        return 0
     }
-    /// 状态栏的高度
+    /// 顶部状态栏高度（包括安全区）
     public static var statusBarHeight : CGFloat {
-        var height = UIApplication.shared.statusBarFrame.size.height
-        height = height < 20 ? (safeBottomHeight > 0 ? 44 : 20) : height
-        return height
+        var statusBarHeight: CGFloat = 0
+        if #available(iOS 13.0, *) {
+            let scene = UIApplication.shared.connectedScenes.first
+            guard let windowScene = scene as? UIWindowScene else { return 0 }
+            guard let statusBarManager = windowScene.statusBarManager else { return 0 }
+            statusBarHeight = statusBarManager.statusBarFrame.height
+        } else {
+            statusBarHeight = UIApplication.shared.statusBarFrame.height
+        }
+        return statusBarHeight
     }
     /// 导航栏的高度
     public static var navBarHeight: CGFloat {

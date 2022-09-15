@@ -300,10 +300,11 @@ extension UIView {
 
 
 // MARK: - view + SVProgressHUD
-extension UIView{
+extension UIView {
     // MARK: - SVProgressHUD提示设置
     /// 显示加载
-    public static func showToastActivity() {
+    public static func showToastActivity(maskType: SVProgressHUDMaskType = .clear) {
+        SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.show()
     }
     /// 隐藏加载
@@ -313,25 +314,29 @@ extension UIView{
     
     /// 信息提示
     /// - Parameter with:提示文字
-    public static func showInfo(with status: String?) {
+    public static func showInfo(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+        SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showInfo(withStatus: status)
     }
     
     /// 加载提示
     /// - Parameter with:提示文字
-    public static func showLoding(with status: String?) {
+    public static func showLoding(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+        SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.show(withStatus: status)
     }
     
     /// 成功提示
     /// - Parameter with:提示文字
-    public static func showSuccess(with status: String?) {
+    public static func showSuccess(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+        SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showSuccess(withStatus: status)
     }
     
-    /// 黑色背景错误提示
+    /// 错误提示
     /// - Parameter with:提示文字
-    public static func showError(with status: String?) {
+    public static func showError(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+        SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showError(withStatus: status)
     }
     
@@ -347,7 +352,6 @@ extension UIView{
         SVProgressHUD.dismiss(withDelay: withDelay)
     }
 }
-
 
 // MARK: - view + BlurView
 extension UIView {
