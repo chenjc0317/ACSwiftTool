@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITableView{
+public extension UITableView{
     /// 注册Header 或 Footer(Nib)
     ///
     /// - Parameter cell: cell类型
@@ -62,6 +62,7 @@ extension UITableView{
         let point = child.convert(CGPoint.zero, to: self)
         return self.indexPathForRow(at: point)
     }
+    
     /// 根据 child view  获取对应Cell
     func cell(by child: UIView)-> UITableViewCell? {
         let point = child.convert(CGPoint.zero, to: self)

@@ -8,7 +8,7 @@
 
 
 import Foundation
-extension Array {
+public extension Array {
     /// 去除数组重复元素
     /// - Returns: 去除数组重复元素后的数组
     func filterDuplicates<E: Equatable>(_ filter: (Element) -> E) -> [Element] {
@@ -22,7 +22,7 @@ extension Array {
         return result
     }
 }
-extension Array where Element: Hashable{
+public  extension Array where Element: Hashable{
     /// 数组去重-有序
     var deduplicates : [Element] {
         var keys:[Element:()] = [:]
@@ -35,7 +35,7 @@ extension Sequence where Element: Equatable {
     }
 }
 // MARK:越界保护
-extension Array {
+public extension Array {
     subscript (safe index: Int) -> Element? {
         if self.count > index {
             return self[index]

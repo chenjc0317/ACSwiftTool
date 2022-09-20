@@ -7,7 +7,7 @@
 //
 import MJRefresh
 
-extension UIScrollView {
+public extension UIScrollView {
     // MARK: - 头部
     /// 添加头部刷新
     ///
@@ -90,7 +90,7 @@ extension UIScrollView {
     func beginTrailerRefresh() {
         mj_trailer?.beginRefreshing()
     }
-
+    
     /// 结束左滑刷新
     func endTrailerRefresh() {
         mj_trailer?.endRefreshing()

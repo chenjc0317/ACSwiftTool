@@ -8,8 +8,7 @@
 
 import UIKit
 
-extension UIDevice {
-
+public extension UIDevice {
     // MARK: - Get String Value
     /// 获取设备磁盘总容量 单位GB
     var totalDiskSpaceInGB: String {

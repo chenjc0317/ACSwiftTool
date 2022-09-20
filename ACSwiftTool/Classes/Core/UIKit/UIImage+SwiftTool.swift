@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIImage{
+public extension UIImage{
     /// 根据颜色生成图片
-    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
+    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
         UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
         defer {
             UIGraphicsEndImageContext()
@@ -28,7 +28,7 @@ extension UIImage{
     }
     
     /// 质量压缩
-    public func compress(maxSize: Int) -> Data? {
+    func compress(maxSize: Int) -> Data? {
         var compression: CGFloat = 1
         guard var data = self.jpegData(compressionQuality: 1) else { return nil }
         if data.count < maxSize {
@@ -51,7 +51,7 @@ extension UIImage{
     }
     
     /// 尺寸压缩
-    public func compress(maxLength: CGFloat) -> UIImage? {
+    func compress(maxLength: CGFloat) -> UIImage? {
         
         if maxLength <= 0 {
             return self
@@ -80,7 +80,7 @@ extension UIImage{
         }
     }
     /// 切成圆形
-    public func circleImage() -> UIImage? {
+    func circleImage() -> UIImage? {
         // NO代表透明
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         // 获得上下文
@@ -98,18 +98,18 @@ extension UIImage{
     }
     
     //返回一个将白色背景变透明的UIImage
-    public func imageByRemoveWhiteBg()  -> UIImage?{
+    func imageByRemoveWhiteBg()  -> UIImage?{
         let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
         return transparentColor(colorMasking: colorMasking)
     }
     
     //返回一个将黑色背景变透明的UIImage
-    public func imageByRemoveBlackBg() -> UIImage? {
+    func imageByRemoveBlackBg() -> UIImage? {
         let colorMasking: [CGFloat] = [0, 32, 0, 32, 0, 32]
         return transparentColor(colorMasking: colorMasking)
     }
     
-    public func transparentColor(colorMasking:[ CGFloat ]) ->  UIImage? {
+    func transparentColor(colorMasking:[ CGFloat ]) ->  UIImage? {
         if  let  rawImageRef =  self .cgImage {
             UIGraphicsBeginImageContext ( self .size)
             if  let  maskedImageRef = rawImageRef.copy (maskingColorComponents: colorMasking) {

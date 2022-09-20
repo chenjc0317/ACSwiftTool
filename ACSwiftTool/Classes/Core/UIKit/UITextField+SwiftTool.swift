@@ -8,16 +8,16 @@
 
 import UIKit
  
-extension UITextField {
+public extension UITextField {
     /// 添加左内边距
-    public func addLeftTextPadding(_ blankSize: CGFloat) {
+    func addLeftTextPadding(_ blankSize: CGFloat) {
         let leftView = UIView()
         leftView.frame = CGRect(x: 0, y: 0, width: blankSize, height: frame.height)
         self.leftView = leftView
         self.leftViewMode = UITextField.ViewMode.always
     }
     /// 添加右内边距
-    public func addRightTextPadding(_ blankSize: CGFloat) {
+    func addRightTextPadding(_ blankSize: CGFloat) {
         let rightView = UIView()
         rightView.frame = CGRect(x: 0, y: 0, width: blankSize, height: frame.height)
         self.rightView = rightView
@@ -25,7 +25,7 @@ extension UITextField {
     }
     
     /// 在文本框的左边添加一个图标
-    public func addLeftIcon(_ image: UIImage?, frame: CGRect, imageSize: CGSize) {
+    func addLeftIcon(_ image: UIImage?, frame: CGRect, imageSize: CGSize) {
         let leftView = UIView()
         leftView.frame = frame
         let imgView = UIImageView()

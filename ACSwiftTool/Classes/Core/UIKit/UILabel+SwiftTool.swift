@@ -7,9 +7,9 @@
 //
 
 import UIKit
-extension UILabel {
+public extension UILabel {
     /// 自定义初始化
-    public convenience init(text : String?, textColor : UIColor?, textFont : UIFont?, textAlignment: NSTextAlignment = .left, numberLines: Int = 1) {
+    convenience init(text : String?, textColor : UIColor?, textFont : UIFont?, textAlignment: NSTextAlignment = .left, numberLines: Int = 1) {
         self.init()
         self.text = text
         self.textColor = textColor ?? UIColor.black
@@ -18,12 +18,12 @@ extension UILabel {
         self.numberOfLines = numberLines
         self.clipsToBounds = false
     }
-
+    
     /// 预计高度
     /// - Parameters:
     ///   - maxWidth: 最大宽度
     ///   - maxLine: 最大列
-    public func predictHeight(maxWidth: CGFloat,maxLine:Int = 0) -> CGFloat {
+    func predictHeight(maxWidth: CGFloat,maxLine:Int = 0) -> CGFloat {
         let label = UILabel(frame: CGRect(
             x: 0,
             y: 0,
@@ -46,7 +46,7 @@ extension UILabel {
     /// - Parameters:
     ///   - maxHeight: 最大高度
     ///   - maxLine: 最大列
-    public func predictWidth(maxHeight: CGFloat,maxLine:Int = 0) -> CGFloat {
+    func predictWidth(maxHeight: CGFloat,maxLine:Int = 0) -> CGFloat {
         let label = UILabel(frame: CGRect(
             x: 0,
             y: 0,
@@ -66,7 +66,7 @@ extension UILabel {
     }
     
     /// 改变行间距
-    public func changeLineSpace(space: CGFloat) {
+    func changeLineSpace(space: CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
@@ -78,9 +78,9 @@ extension UILabel {
         self.attributedText = attributedString
         self.sizeToFit()
     }
-
+    
     /// 改变字间距
-    public func changeWordSpace(space: CGFloat) {
+    func changeWordSpace(space: CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
@@ -91,9 +91,9 @@ extension UILabel {
         self.attributedText = attributedString
         self.sizeToFit()
     }
-
-    /// 改变字间距和行间距  
-    public func changeSpace(lineSpace:CGFloat, wordSpace:CGFloat) {
+    
+    /// 改变字间距和行间距
+    func changeSpace(lineSpace:CGFloat, wordSpace:CGFloat) {
         if self.text == nil || self.text == "" {
             return
         }
@@ -104,11 +104,11 @@ extension UILabel {
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: .init(location: 0, length: (text?.count)!))
         self.attributedText = attributedString
         self.sizeToFit()
-
+        
     }
     
     /// UILabel根据文字的需要的高度
-    public var requiredHeight: CGFloat {
+    var requiredHeight: CGFloat {
         let label = UILabel(frame: CGRect(
             x: 0,
             y: 0,
@@ -125,7 +125,7 @@ extension UILabel {
     }
     
     /// UILabel根据文字实际的行数
-    public var lines: Int {
+    var lines: Int {
         return Int(requiredHeight / font.lineHeight)
     }
     

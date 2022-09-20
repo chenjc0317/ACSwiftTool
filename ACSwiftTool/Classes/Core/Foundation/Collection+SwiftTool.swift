@@ -7,7 +7,7 @@
 //
 
 import Foundation
-extension Collection {
+public extension Collection {
     /// 判断集合非空
     public var isNotEmpty: Bool {
         return !isEmpty

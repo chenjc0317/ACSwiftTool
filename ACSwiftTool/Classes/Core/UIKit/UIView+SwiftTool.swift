@@ -16,29 +16,29 @@ public enum LinePosition: Int {
 }
 
 // MARK: - add
-extension UIView {
+public extension UIView {
     /// 批量添加子控件
     ///
     /// - Parameter views: 控件
-    public func addSubviews(_ views: [UIView]) {
+    func addSubviews(_ views: [UIView]) {
         var iterator = views.makeIterator()
         while let view = iterator.next() {
             addSubview(view)
         }
     }
-
+    
     /// 添加阴影
-    public func shadow(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.2) {
+    func shadow(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.2) {
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shadowColor = color.cgColor
         layer.shadowOffset = offset
         layer.shadowRadius = radius
         layer.shadowOpacity = opacity
         layer.masksToBounds = false
-
+        
     }
     /// 添加阴影图层
-    public func shadowLayer(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5,cornerRadius:CGFloat,bounds:CGRect) {
+    func shadowLayer(ofColor color: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5,cornerRadius:CGFloat,bounds:CGRect) {
         let layer = CALayer()
         layer.frame = bounds
         layer.shadowColor = color.cgColor
@@ -55,7 +55,7 @@ extension UIView {
     
     /// 添加细线 ply线高
     @discardableResult
-    public func line(position : LinePosition, color : UIColor, ply : CGFloat, leftPadding : CGFloat, rightPadding : CGFloat) -> UIView {
+    func line(position : LinePosition, color : UIColor, ply : CGFloat, leftPadding : CGFloat, rightPadding : CGFloat) -> UIView {
         let line = UIView.init()
         line.backgroundColor = color;
         line.translatesAutoresizingMaskIntoConstraints = false
@@ -76,15 +76,15 @@ extension UIView {
     }
 }
 // MARK: - set
-extension UIView {
+public extension UIView {
     
     /// 添加顶部mask
-    public func topCornerRadius(rect:CGRect,radius:CGFloat){
+    func topCornerRadius(rect:CGRect,radius:CGFloat){
         cornerRadius(position: [.topLeft, .topRight], cornerRadius: radius, roundedRect:rect)
     }
     
     /// 指定位置圆角
-    public func addRoundedCorners(_ corners: UIRectCorner,radius: CGFloat) {
+    func addRoundedCorners(_ corners: UIRectCorner,radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let maskLayer = CAShapeLayer()
         maskLayer.frame = self.bounds
@@ -93,7 +93,7 @@ extension UIView {
     }
     
     /// 使用贝塞尔曲线设置圆角
-    public func cornerRadius(position: UIRectCorner, cornerRadius: CGFloat, roundedRect: CGRect) {
+    func cornerRadius(position: UIRectCorner, cornerRadius: CGFloat, roundedRect: CGRect) {
         let path = UIBezierPath(roundedRect:roundedRect, byRoundingCorners: position, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let layer = CAShapeLayer()
         layer.frame = roundedRect
@@ -102,7 +102,7 @@ extension UIView {
     }
     
     /// 设置边框线颜色
-    public func border(color: UIColor, width: CGFloat = 1.0) {
+    func border(color: UIColor, width: CGFloat = 1.0) {
         self.layer.masksToBounds = true
         self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
@@ -136,9 +136,9 @@ extension UIView {
         return gradientLayer
     }
 }
-extension UIView {
+public extension UIView {
     /// 加载Xib
-    public func loadViewFromNib() -> UIView {
+    func loadViewFromNib() -> UIView {
         let className = type(of: self)
         let bundle = Bundle(for: className)
         let name = NSStringFromClass(className).components(separatedBy: ".").last
@@ -148,7 +148,7 @@ extension UIView {
     }
     
     /// 获取view的UIViewController
-    public func parentViewController()->UIViewController?{
+    func parentViewController()->UIViewController?{
         for view in sequence(first: self.superview, next: {$0?.superview}){
             if let responder = view?.next{
                 if responder.isKind(of: UIViewController.self){
@@ -160,7 +160,7 @@ extension UIView {
     }
     
     /// 生成截图
-    public func screenShot() -> UIImage? {
+    func screenShot() -> UIImage? {
         guard bounds.size.height > 0 && bounds.size.width > 0 else {
             return nil
         }
@@ -177,7 +177,7 @@ extension UIView {
     
 }
 // MARK: - UIView + TapGesture
-extension UIView {
+public extension UIView {
     private struct AssociatedKeys {
         static var tapGesture = false
     }
@@ -200,7 +200,7 @@ extension UIView {
     
     /// 添加长按手势
     @discardableResult
-    public func addLongPressGestureRecognizer(target : Any?, action : Selector?, pressDuration: Double = 1) -> UILongPressGestureRecognizer {
+    func addLongPressGestureRecognizer(target : Any?, action : Selector?, pressDuration: Double = 1) -> UILongPressGestureRecognizer {
         let longPressGesture = UILongPressGestureRecognizer.init(target: target, action: action)
         longPressGesture.minimumPressDuration    = pressDuration;
         self.addGestureRecognizer(longPressGesture)
@@ -210,10 +210,10 @@ extension UIView {
 }
 
 // MARK: - @IBInspectable
-extension UIView {
+public extension UIView {
     /// 设置圆角
     @IBInspectable
-    public var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat {
         set {
             self.layer.masksToBounds = true
             self.layer.cornerRadius = newValue
@@ -300,55 +300,55 @@ extension UIView {
 
 
 // MARK: - view + SVProgressHUD
-extension UIView {
+public extension UIView {
     // MARK: - SVProgressHUD提示设置
     /// 显示加载
-    public static func showToastActivity(maskType: SVProgressHUDMaskType = .clear) {
+    static func showToastActivity(maskType: SVProgressHUDMaskType = .clear) {
         SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.show()
     }
     /// 隐藏加载
-    public static func hideToastActivity() {
+    static func hideToastActivity() {
         self.dismissHUD()
     }
     
     /// 信息提示
     /// - Parameter with:提示文字
-    public static func showInfo(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+    static func showInfo(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
         SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showInfo(withStatus: status)
     }
     
     /// 加载提示
     /// - Parameter with:提示文字
-    public static func showLoding(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+    static func showLoding(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
         SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.show(withStatus: status)
     }
     
     /// 成功提示
     /// - Parameter with:提示文字
-    public static func showSuccess(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+    static func showSuccess(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
         SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showSuccess(withStatus: status)
     }
     
     /// 错误提示
     /// - Parameter with:提示文字
-    public static func showError(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
+    static func showError(with status: String?,maskType: SVProgressHUDMaskType = .clear) {
         SVProgressHUD.setDefaultMaskType(maskType)
         SVProgressHUD.showError(withStatus: status)
     }
     
     /// 关闭提示
-    public static func dismissHUD() {
+    static func dismissHUD() {
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.dismiss()
     }
     
     /// 关闭提示
     /// - Parameter time:时间
-    public static func dismissHUD(withDelay: TimeInterval) {
+    static func dismissHUD(withDelay: TimeInterval) {
         SVProgressHUD.dismiss(withDelay: withDelay)
     }
 }

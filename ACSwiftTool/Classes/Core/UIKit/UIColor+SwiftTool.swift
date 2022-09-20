@@ -8,18 +8,18 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
     /// hex 色值
-    public class func hex(_ hex: String, alpha: CGFloat = 1.0) -> UIColor{
+    class func hex(_ hex: String, alpha: CGFloat = 1.0) -> UIColor{
         let tempStr = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         let hexint = intFromHexString(tempStr)
         let color = UIColor(red: ((CGFloat) ((hexint & 0xFF0000) >> 16))/255, green: ((CGFloat) ((hexint & 0xFF00) >> 8))/255, blue: ((CGFloat) (hexint & 0xFF))/255, alpha: alpha)
         return color
     }
-
+    
     /// UIColor -> Hex String
-    public var hex: String? {
+    var hex: String? {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -49,9 +49,9 @@ extension UIColor {
             )
         }
     }
-
+    
     /// 随机颜色
-    public class func randrom() -> UIColor {
+    class func randrom() -> UIColor {
         let r = CGFloat(arc4random()%256)/255.0
         let g = CGFloat(arc4random()%256)/255.0
         let b = CGFloat(arc4random()%256)/255.0
@@ -77,7 +77,7 @@ extension UIColor {
     /// 十六进制颜色
     /// - Parameters:
     ///   - hex: 颜色 0xFFFFFF
-    public convenience init(hex: UInt) {
+    convenience init(hex: UInt) {
         let r = (hex >> 16) & 0xFF
         let g = (hex >> 8) & 0xFF
         let b = (hex) & 0xFF
@@ -87,12 +87,12 @@ extension UIColor {
     /// RGB颜色
     ///
     /// - Parameter rgb: r g b
-    public convenience init(r: CGFloat, g: CGFloat, b: CGFloat,a:CGFloat) {
+    convenience init(r: CGFloat, g: CGFloat, b: CGFloat,a:CGFloat) {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
     }
     
     /// 左右渐变色
-    public static func gradient(left: UIColor, right: UIColor, rect: CGRect) -> CAGradientLayer {
+    static func gradient(left: UIColor, right: UIColor, rect: CGRect) -> CAGradientLayer {
         func gradientLayer(rect: CGRect) -> CAGradientLayer {
             let colorLayer = CAGradientLayer()
             colorLayer.frame = rect

@@ -6,9 +6,9 @@
 //  Copyright © 2021 CocoaPods. All rights reserved.
 
 import UIKit
-extension UIButton {
+public extension UIButton {
     /// 图片
-    public var image : UIImage? {
+    var image : UIImage? {
         set {
             self.setImage(newValue, for: .normal)
         }
@@ -17,7 +17,7 @@ extension UIButton {
         }
     }
     /// 背景图片
-    public var backgroundImage : UIImage? {
+    var backgroundImage : UIImage? {
         set {
             self.setBackgroundImage(newValue, for: .normal)
         }
@@ -26,7 +26,7 @@ extension UIButton {
         }
     }
     /// 标题
-    public var title : String? {
+    var title : String? {
         set {
             self.setTitle(newValue, for: .normal)
         }
@@ -35,7 +35,7 @@ extension UIButton {
         }
     }
     /// 标题颜色
-    public var titleColor : UIColor? {
+    var titleColor : UIColor? {
         set {
             self.setTitleColor(newValue, for: .normal)
         }
@@ -44,7 +44,7 @@ extension UIButton {
         }
     }
     /// 标题字体
-    public var titleFont : UIFont? {
+    var titleFont : UIFont? {
         set {
             self.titleLabel?.font = newValue
         }
@@ -55,7 +55,7 @@ extension UIButton {
     }
 }
 // MARK:- UIButton 图片 与 title 位置关系
-extension UIButton {
+public extension UIButton {
     
     /// 图片 和 title 的布局样式
     enum ImageTitleLayout {

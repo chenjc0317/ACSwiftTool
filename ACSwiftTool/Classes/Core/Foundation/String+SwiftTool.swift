@@ -69,7 +69,7 @@ public extension String {
     }
 }
 // MARK: - 转换
-extension String {
+public extension String {
     /// 转为数组
     func toArr() -> [String] {
         return self.map(String.init)
@@ -94,7 +94,7 @@ extension String {
     /// 将原始的url编码为合法的url
     func urlEncoded() -> String? {
         let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters:
-                                                                .urlQueryAllowed)
+                .urlQueryAllowed)
         return encodeUrlString
     }
     
@@ -222,7 +222,7 @@ public extension String {
     }
 }
 // MARK: - 检测过滤
-extension String {
+public extension String {
     /// 获取宽度
     func getWidthForComment(font: UIFont, height: CGFloat) -> CGFloat {
         let font = font

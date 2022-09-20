@@ -9,9 +9,9 @@
 import UIKit
 
 // MARK: -  处理界面跳转
-extension UIViewController {
+public extension UIViewController {
     /// 跳转指定控制器
-    public func popAnyViewController(toVC: UIViewController){
+    func popAnyViewController(toVC: UIViewController){
         let vc = UIViewController()
         var targetVC : UIViewController!
         for controller in navigationController!.viewControllers {
@@ -24,24 +24,24 @@ extension UIViewController {
         }
     }
     /// 跳转根控制器
-    public func popToRootViewController(){
+    func popToRootViewController(){
         self.navigationController?.popToRootViewController(animated: true)
     }
     /// 返回到根界面的某个控制器
-    public func popToRootVCInIndex(index: Int){
+    func popToRootVCInIndex(index: Int){
         self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
         self.navigationController?.tabBarController?.selectedIndex = index
         self.navigationController?.popToRootViewController(animated: true)
     }
     /// 返回两级界面
-    public func backTwoViewController(){
+    func backTwoViewController(){
         if (self.navigationController?.viewControllers.count)! >= 2 {
             guard let vc = self.navigationController?.viewControllers[1] else { return }
             self.navigationController?.popToViewController(vc, animated: true)
         }
     }
     /// 通过UIStoryboard创建UIViewController
-    public class func storyboard<T: UIViewController>(storyboardName: String, classType: T.Type, identifier: String = T.named) -> T? {
+    class func storyboard<T: UIViewController>(storyboardName: String, classType: T.Type, identifier: String = T.named) -> T? {
         if identifier.count == 0 {
             return nil
         }
@@ -50,7 +50,7 @@ extension UIViewController {
     }
     
     /// 前进到下一页面
-    public func go(_ viewController: UIViewController, animated: Bool = true) {
+    func go(_ viewController: UIViewController, animated: Bool = true) {
         if let nav = self.navigationController {
             nav.pushViewController(viewController, animated: animated)
         } else {
@@ -59,7 +59,7 @@ extension UIViewController {
     }
     
     /// 返回到下一页面
-    public func back(isPopToRoot: Bool? = false, animated: Bool = true) {
+    func back(isPopToRoot: Bool? = false, animated: Bool = true) {
         if let nav = self.navigationController {
             if nav.viewControllers.count == 1 && nav.viewControllers.first == self, nav.presentingViewController != nil {
                 nav.dismiss(animated: true, completion: nil)
@@ -76,7 +76,7 @@ extension UIViewController {
     }
     
     /// 返回到指定的页面 special
-    public func back(svc: UIViewController.Type) -> Bool {
+    func back(svc: UIViewController.Type) -> Bool {
         var isSuccess = false
         if let nav = self.navigationController {
             for vc in nav.viewControllers {
@@ -91,7 +91,7 @@ extension UIViewController {
     }
     
     // MARK: - 跳转到指定的VC
-    public func jump(_ jvc: UIViewController.Type) {
+    func jump(_ jvc: UIViewController.Type) {
         
         // 就在当前界面
         if self.isKind(of: jvc) {
@@ -141,7 +141,7 @@ extension UIViewController {
     }
     
     /// 从导航栈中移除指定类型的VC
-    public func navRemove(_ vc: UIViewController.Type) {
+    func navRemove(_ vc: UIViewController.Type) {
         if let nav = self.navigationController {
             let originVCs = nav.viewControllers
             var newVCs:[UIViewController] = []
@@ -154,7 +154,7 @@ extension UIViewController {
         }
     }
     /// 从导航栈中移除指定类型的[VC]
-    public func navRemove(_ vcs: [UIViewController.Type]) {
+    func navRemove(_ vcs: [UIViewController.Type]) {
         if let nav = self.navigationController {
             let originVCs = nav.viewControllers
             var newVCs:[UIViewController] = []
@@ -176,10 +176,10 @@ extension UIViewController {
     
 }
 
-extension UIViewController{
+public extension UIViewController{
     /// 显示Sheet
     @discardableResult
-    public func showActionSheet(title: String?, message: String?, buttonTitles: [String]? = nil, highlightedButtonIndex: Int? = nil, completion: ((Int) -> Void)? = nil) -> UIAlertController {
+    func showActionSheet(title: String?, message: String?, buttonTitles: [String]? = nil, highlightedButtonIndex: Int? = nil, completion: ((Int) -> Void)? = nil) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         let allButtons = buttonTitles ?? [String]()
         
@@ -210,27 +210,27 @@ extension UIViewController{
         buttonTitles: [String]? = nil,
         highlightedButtonIndex: Int? = nil,
         completion: ((Int) -> Void)? = nil) -> UIAlertController {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        var allButtons = buttonTitles ?? [String]()
-        if allButtons.count == 0 {
-            allButtons.append("确定")
-        }
-        
-        for index in 0..<allButtons.count {
-            let buttonTitle = allButtons[index]
-            let action = UIAlertAction(title: buttonTitle, style: .default, handler: { _ in
-                completion?(index)
-            })
-            alertController.addAction(action)
-            // Check which button to highlight
-            if let highlightedButtonIndex = highlightedButtonIndex, index == highlightedButtonIndex {
-                alertController.preferredAction = action
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            var allButtons = buttonTitles ?? [String]()
+            if allButtons.count == 0 {
+                allButtons.append("确定")
             }
+            
+            for index in 0..<allButtons.count {
+                let buttonTitle = allButtons[index]
+                let action = UIAlertAction(title: buttonTitle, style: .default, handler: { _ in
+                    completion?(index)
+                })
+                alertController.addAction(action)
+                // Check which button to highlight
+                if let highlightedButtonIndex = highlightedButtonIndex, index == highlightedButtonIndex {
+                    alertController.preferredAction = action
+                }
+            }
+            present(alertController, animated: true, completion: nil)
+            return alertController
         }
-        present(alertController, animated: true, completion: nil)
-        return alertController
-    }
 }
 
 
